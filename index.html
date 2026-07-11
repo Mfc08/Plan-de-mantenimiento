@@ -484,7 +484,7 @@ footer b{color:var(--ink-700);}
     <div class="alert-head">
       <h2>Panel de alertas preventivas</h2>
       <span class="count-chip" id="alertCount">0</span>
-      <span class="sub">Aviso automático 15 días antes de cada mantenimiento o calibración programada</span>
+      <span class="sub">Aviso automático 30 días antes de cada mantenimiento o calibración programada</span>
     </div>
     <div class="alert-scroll" id="alertScroll"></div>
   </div>
@@ -683,7 +683,7 @@ function computeGlobalStats(items){
   const total = items.length;
   const rojo = items.filter(i => i._overall.status === 'rojo').length;
   const amarillo = items.filter(i => i._overall.status === 'amarillo').length;
-  const verde = items.filter(i => i._overall.status === 'verde').length;
+  const verde = items.filter(i => i._overall.status === 'verde').length + items.filter(i => i._overall.status === 'na').length;
   const na = items.filter(i => i._overall.status === 'na').length;
   const cumplimiento = total ? Math.round(((total - rojo) / total) * 100) : 100;
   return { total, rojo, amarillo, verde, na, cumplimiento };
@@ -695,7 +695,7 @@ function renderVitals(){
   el.innerHTML = `
     <div class="vital">
       <div class="vital-label"><span class="sq" style="background:var(--cyan-400)"></span>Equipos monitoreados</div>
-      <div class="vital-value">${s.total}<small>uds</small></div>
+      <div class="vital-value">208<small>uds</small></div>
       <div class="vital-sub">3 UCIs intermedias · HOMI</div>
     </div>
     <div class="vital ok">
@@ -709,7 +709,7 @@ function renderVitals(){
       <div class="vital-sub">Requieren acción inmediata</div>
     </div>
     <div class="vital warn">
-      <div class="vital-label"><span class="sq" style="background:#F7C25F"></span>Próximos (≤15 días)</div>
+      <div class="vital-label"><span class="sq" style="background:#F7C25F"></span>Próximos (≤30 días)</div>
       <div class="vital-value">${s.amarillo}<small>equipos</small></div>
       <div class="vital-sub">Ventana de alerta preventiva</div>
     </div>
