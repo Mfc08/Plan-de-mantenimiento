@@ -595,7 +595,17 @@ function responsableMtto(item){
 }
 
 function responsableCal(item){
-  return item.proximaCalibracion || item.calibracion ? 'Celsius' : 'Fuera de servicio';
+
+
+    if ((item.estado || "").toUpperCase() === "FUERA DE SERVICIO") {
+        return "No aplica";
+    }
+
+    if (!item.proximaCalibracion && !item.calibracion) {
+        return "No aplica";
+    }
+
+    return "Celsius";
 }
 
 
@@ -771,7 +781,7 @@ function renderUciSections(){
   ucis.forEach(uci => {
     try{
       const items = filteredItemsFor(uci);
-      const allUciItems = DATA.filter(i => i.uci === uci); // para el gauge (no afectado por búsqueda de texto, sí por nada más)
+      const allUciItems = DATA.filter(i => i.uci === uci);
       drawGauge(uci, computeGlobalStats(allUciItems));
       renderStatPills(uci, computeGlobalStats(allUciItems));
       if(!sectionTab[uci]) sectionTab[uci] = 'tabla';
