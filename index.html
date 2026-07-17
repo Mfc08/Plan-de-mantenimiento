@@ -1140,7 +1140,7 @@ function buildInventoryContext(){
     return `${i.equipo} | UCI:${UCI_META[i.uci].short} | Cod:${i._code} | Marca:${i.marca} ${i.modelo} | ProxMtto:${i.mttoProximo||'NA'}(${i._mtto.status}) | ProxCal:${i.proximaCalibracion||'NA'}(${i._cal.status}) | Riesgo:${i.clasificacionInvima||'NA'} | RespMtto:${responsableMtto(i)} | RespCal:${responsableCal(i)}`;
   });
   const s = computeGlobalStats(DATA);
-  const header = `Resumen global: ${s.total} equipos · Cumplimiento ${s.cumplimiento}% · Vencidos ${s.rojo} · Próximos(<=15d) ${s.amarillo} · En regla ${s.verde}. Fecha de hoy: ${TODAY.toISOString().slice(0,10)}. Regla de responsables: el mantenimiento de equipos marca Dräger lo ejecuta el fabricante Dräger; el resto del parque lo cubre Ingeniería Biomédica interna; todas las calibraciones metrológicas las ejecuta la empresa Celsius.`;
+  const header = `Resumen global: ${s.total} equipos · Cumplimiento ${s.cumplimiento}% · Vencidos ${s.rojo} · Próximos(<=15d) ${s.amarillo} · Activo ${s.verde}. Fecha de hoy: ${TODAY.toISOString().slice(0,10)}. Regla de responsables: el mantenimiento de equipos marca Dräger lo ejecuta el fabricante Dräger; el resto del parque lo cubre Ingeniería Biomédica interna; todas las calibraciones metrológicas las ejecuta la empresa Celsius.`;
   return header + '\n' + lines.join('\n');
 }
 
